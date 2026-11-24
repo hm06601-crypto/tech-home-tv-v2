@@ -17,9 +17,9 @@ on:
         type: boolean
         default: false
       prerelease:
-        description: "Mark it as a pre-release, never Latest (keep this on in the IPTVnator repository itself)"
+        description: "Mark this release as a pre-release"
         type: boolean
-        default: true
+        default: false
   pull_request:
     paths:
       - "tv-shell/**"
@@ -188,27 +188,26 @@ jobs:
         env:
           TVSHELL_KEYSTORE_B64: ${{ secrets.TVSHELL_KEYSTORE_B64 }}
           TVSHELL_KEYSTORE_PASSWORD: ${{ secrets.TVSHELL_KEYSTORE_PASSWORD }}
-          TVSHELL_KEY_ALIAS: ${{ secrets.TVSHELL_KEY_ALIAS }}
-          TVSHELL_KEY_PASSWORD: ${{ secrets.TVSHELL_KEY_PASSWORD }}
+          TVSHELL_KEY_ALIAS: tech-home-tv-release
+          TVSHELL_KEY_PASSWORD: ${{ secrets.TVSHELL_KEYSTORE_PASSWORD }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
           set -euo pipefail
           # versionCode: commit time in minutes, monotonic across forks and upstream.
           TVSHELL_VERSION_CODE=$(( $(git log -1 --format=%ct HEAD) / 60 ))
           export TVSHELL_VERSION_CODE
-          SIGNER=debug
-          if [ -n "${TVSHELL_KEYSTORE_B64:-}" ]; then
-            echo "$TVSHELL_KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/tvshell.keystore"
-            export TVSHELL_KEYSTORE_PATH="$RUNNER_TEMP/tvshell.keystore"
-            SIGNER=release
+          if [ -z "${TVSHELL_KEYSTORE_B64:-}" ] || [ -z "${TVSHELL_KEYSTORE_PASSWORD:-}" ]; then
+            echo "::error::Release signing secrets are required; refusing to publish a debug-signed APK."
+            exit 1
           fi
-          # Always a release (non-debuggable) build; without the secrets it is
-          # signed with the versioned debug key (see app/build.gradle).
+          echo "$TVSHELL_KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/tvshell.keystore"
+          export TVSHELL_KEYSTORE_PATH="$RUNNER_TEMP/tvshell.keystore"
+          SIGNER=release
           ./gradlew --no-daemon :app:assembleRelease
           APK=app/build/outputs/apk/release/app-release.apk
           test -f "$APK"
           VERSION=$(grep -oP "versionName '\K[^']+" app/build.gradle)
-          OUT="iptvnator-tv-shell-${VERSION}-${HEAD_SHA::7}.apk"
+          OUT="TechHomeTV-${VERSION}-${HEAD_SHA::7}.apk"
           mkdir -p ../../dist
           cp "$APK" "../../dist/$OUT"
           cp app/build/generated/media3Ffmpeg/source/ffmpeg-*.tar.xz ../../dist/
@@ -258,6 +257,6 @@ jobs:
           gh release create "$TAG" "dist/${APK_NAME}" dist/ffmpeg-*.tar.xz \
             --target "$GITHUB_SHA" \
             "${FLAGS[@]}" \
-            --title "IPTVnator Android TV ${APK_VERSION} (build ${GITHUB_RUN_NUMBER})" \
-            --notes "IPTVnator for Fire TV / Android TV (experimental). Install with the Downloader app (APK link below) or with \`adb install -r\`. Unless the repository provides a release key, the APK is signed with the versioned debug key (tv-shell/android/app/debug.keystore), so newer builds install over older ones. See tv-shell/README.md."
+            --title "Tech Home TV Android ${APK_VERSION} (build ${GITHUB_RUN_NUMBER})" \
+            --notes "Tech Home TV for Android phones, tablets, Android TV and Fire TV (experimental). Install with the Downloader app (APK link below) or with \`adb install -r\`. The APK is signed with the Tech Home TV release key. See tv-shell/README.md."
           echo "Release: https://github.com/${GITHUB_REPOSITORY}/releases/tag/${TAG}"

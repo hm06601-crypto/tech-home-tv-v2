@@ -6,10 +6,11 @@ export const PREFERRED_LANGUAGE_STORAGE_KEY = 'iptvnator:preferred-language';
 export function getInitialLanguage(): Language {
     try {
         return normalizeAppLanguage(
-            localStorage.getItem(PREFERRED_LANGUAGE_STORAGE_KEY)
+            localStorage.getItem(PREFERRED_LANGUAGE_STORAGE_KEY),
+            Language.ARABIC
         );
     } catch {
-        return Language.ENGLISH;
+        return Language.ARABIC;
     }
 }
 

@@ -9,7 +9,7 @@
     --app-widget-bg: #ffffff;
     --app-heading-color: #1a1d23;
     --app-muted-color: #535d6d;
-    --app-selection-color: #2f7bff;
+    --app-selection-color: #16803c;
 
     @if not $preview {
         // ── Light theme design tokens ─────────────────────────────────────────
@@ -129,7 +129,7 @@
     --app-widget-bg: #1e2330;
     --app-heading-color: #d8dce8;
     --app-muted-color: #a1aabd;
-    --app-selection-color: #78adff;
+    --app-selection-color: #37e46b;
 
     @if not $preview {
         // ── Dark graphite theme ────────────────────────────────────────────

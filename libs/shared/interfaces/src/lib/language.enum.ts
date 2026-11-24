@@ -28,7 +28,10 @@ export enum Language {
 const SUPPORTED_LANGUAGES = new Set<string>(Object.values(Language));
 
 /** Canonicalize saved language codes; legacy Portuguese was Brazilian. */
-export function normalizeAppLanguage(value: unknown): Language {
+export function normalizeAppLanguage(
+    value: unknown,
+    fallback: Language = Language.ENGLISH
+): Language {
     const code =
         typeof value === 'string'
             ? value.trim().replace(/_/g, '-').toLowerCase()
@@ -41,5 +44,5 @@ export function normalizeAppLanguage(value: unknown): Language {
     }
     return SUPPORTED_LANGUAGES.has(code)
         ? (code as Language)
-        : Language.ENGLISH;
+        : fallback;
 }

@@ -1,6 +1,6 @@
 {
-    "appId": "com.fourgray.iptvnator",
-    "productName": "IPTVnator",
+    "appId": "com.techhome.tv",
+    "productName": "Tech Home TV",
     "artifactName": "${name}-${version}-${os}-${arch}.${ext}",
     "fileAssociations": [
         {
@@ -21,8 +21,8 @@
     "publish": [
         {
             "provider": "github",
-            "owner": "4gray",
-            "repo": "iptvnator"
+            "owner": "hm06601-crypto",
+            "repo": "tech-home-tv-v2"
         }
     ],
     "directories": {
@@ -62,9 +62,9 @@
         "**/embedded-mpv-runtime.json"
     ],
     "extraMetadata": {
-        "name": "iptvnator",
-        "productName": "IPTVnator",
-        "desktopName": "iptvnator",
+        "name": "tech-home-tv",
+        "productName": "Tech Home TV",
+        "desktopName": "tech-home-tv",
         "main": "electron-backend/main.js"
     },
     "extraResources": ["dist/apps/electron-backend/workers"],
@@ -90,7 +90,7 @@
     },
     "linux": {
         "category": "Video",
-        "executableName": "iptvnator",
+        "executableName": "tech-home-tv",
         "executableArgs": ["--ozone-platform=x11"],
         "target": [
             {
@@ -124,9 +124,9 @@
     "appImage": {
         "desktop": {
             "entry": {
-                "X-AppImage-Name": "IPTVnator",
-                "X-AppImage-Homepage": "https://github.com/4gray/iptvnator",
-                "X-AppImage-UpdateURL": "https://github.com/4gray/iptvnator"
+                "X-AppImage-Name": "Tech Home TV",
+                "X-AppImage-Homepage": "https://techhome.ct.ws",
+                "X-AppImage-UpdateURL": "https://github.com/hm06601-crypto/tech-home-tv-v2"
             }
         }
     },

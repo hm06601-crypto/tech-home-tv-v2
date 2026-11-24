@@ -111,7 +111,7 @@ export class AppComponent implements OnInit {
     private readonly contextDrawer = inject(WorkspaceShellContextDrawerService);
 
     /** Default language as fallback */
-    private readonly DEFAULT_LANG = Language.ENGLISH;
+    private readonly DEFAULT_LANG = Language.ARABIC;
 
     constructor() {
         startAppMenuActions();

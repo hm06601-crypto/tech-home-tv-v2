@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">IPTVnator</string>
+    <string name="app_name">Tech Home TV</string>
     <string name="file_picker_unavailable">No document picker is available on this device.</string>
-    <string name="loading">Loading IPTVnator…</string>
+    <string name="loading">Loading Tech Home TV…</string>
     <string name="load_error_title">The player could not be loaded</string>
     <string name="load_error">Error: %1$s (code %2$s)</string>
     <string name="server_error">The embedded server could not start (no free port).</string>
@@ -15,7 +15,7 @@
     <string name="renderer_gone_loop">The web view keeps stopping (out of memory?). Try a smaller playlist, or erase the app data from the settings.</string>
     <string name="retry">Retry</string>
     <string name="device_settings_shortcut">Device settings</string>
-    <string name="settings_title">IPTVnator settings</string>
+    <string name="settings_title">Tech Home TV settings</string>
     <string name="done">Done</string>
     <string name="cannot_open_link">No app can open this link.</string>
     <string name="press_back_again">Press Back again to exit</string>

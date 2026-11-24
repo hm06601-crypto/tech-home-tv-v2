@@ -38,7 +38,7 @@ $light-theme: mat.define-theme(
         color: (
             theme-type: light,
             use-system-variables: true,
-            primary: mat.$azure-palette,
+            primary: mat.$green-palette,
             tertiary: mat.$cyan-palette,
         ),
         typography: (
@@ -53,7 +53,7 @@ $dark-theme: mat.define-theme(
         color: (
             theme-type: dark,
             use-system-variables: true,
-            primary: mat.$azure-palette,
+            primary: mat.$green-palette,
             tertiary: mat.$cyan-palette,
         ),
         typography: (
