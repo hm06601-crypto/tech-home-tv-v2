@@ -332,7 +332,7 @@ the `TVSHELL_KEYSTORE_B64` (base64 keystore), `TVSHELL_KEYSTORE_PASSWORD`,
 previous one.
 
 The Android startup mark, legacy and adaptive launcher icons, and TV banner use
-the shared IPTVnator artwork. Regenerate them with
+the Tech Home TV artwork. Regenerate them with
 `node tv-shell/tools/gen-brand-assets.mjs`.
 
 ### Locally (Android Studio or the command line)

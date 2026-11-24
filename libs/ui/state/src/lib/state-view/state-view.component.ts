@@ -49,7 +49,7 @@ interface StateViewButton {
  * again: the state then leads with Retry and emits `retry`. Extra content,
  * such as a list of links, goes in the default slot under the actions; an
  * element with `appStateIcon` replaces the icon tile (the first-run
- * welcome's IPTVnator glyph).
+ * welcome's Tech Home TV artwork).
  */
 @Component({
     selector: 'app-state-view',

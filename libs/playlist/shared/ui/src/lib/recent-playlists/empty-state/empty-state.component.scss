@@ -30,10 +30,10 @@
 
 .welcome__glyph {
     display: block;
-    width: 64px;
-    height: 64px;
+    width: min(100%, 360px);
+    height: auto;
+    max-height: 120px;
     object-fit: contain;
-    border-radius: 12px;
 }
 
 ul {

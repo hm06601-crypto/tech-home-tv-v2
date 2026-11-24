@@ -42,11 +42,11 @@
                     'Helvetica Neue', Arial, sans-serif;
                 z-index: 99999;
             }
-            #initial-splash .splash-mark {
-                font-size: 18px;
-                font-weight: 600;
-                letter-spacing: 0.04em;
-                opacity: 0.85;
+            #initial-splash .splash-logo {
+                display: block;
+                width: min(78vw, 420px);
+                max-height: 150px;
+                object-fit: contain;
             }
             #initial-splash .splash-spinner {
                 width: 28px;
@@ -71,7 +71,11 @@
     </head>
     <body class="mat-app-background">
         <div id="initial-splash" role="status" aria-label="Loading Tech Home TV">
-            <span class="splash-mark">Tech Home TV</span>
+            <img
+                class="splash-logo"
+                src="assets/images/tech-home-tv-logo.png"
+                alt="Tech Home TV"
+            />
             <span class="splash-spinner" aria-hidden="true"></span>
         </div>
         <app-root></app-root>
