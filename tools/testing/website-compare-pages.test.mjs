@@ -9,7 +9,7 @@ import assert from 'node:assert/strict';
  */
 
 const distRoot = new URL('../../dist/apps/website/', import.meta.url);
-const SITE = 'https://4gray.github.io/iptvnator';
+const SITE = 'https://hm06601-crypto.github.io/tech-home-tv-v2';
 const COMPARISONS = [
   'm3u-vs-xtream-vs-stalker',
   'playback-engines',
@@ -96,3 +96,4 @@ test('sitemap lists the comparison pages', async () => {
     assert.ok(sitemap.includes(`<loc>${SITE}/${path}</loc>`));
   }
 });
+

@@ -1,131 +1,76 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import FeatureGrid from '../components/FeatureGrid.astro';
-import ScreenshotShowcase from '../components/ScreenshotShowcase.astro';
-import DownloadCTA from '../components/DownloadCTA.astro';
-import SupportSection from '../components/SupportSection.astro';
-import FeaturedBlogPost from '../components/FeaturedBlogPost.astro';
-import BlogPostCard from '../components/BlogPostCard.astro';
-import { getLatestRelease } from '../lib/downloads';
-import { getGitHubStats } from '../lib/github-stats';
+import { getTechHomeDownloads } from '../lib/tech-home-downloads';
 
-const [release, stats] = await Promise.all([getLatestRelease(), getGitHubStats()]);
-const includeDrafts = import.meta.env.DEV || import.meta.env.PUBLIC_INCLUDE_DRAFTS === 'true';
-
-const allPosts = (await getCollection('blog'))
-  .filter((post) => includeDrafts || !post.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-const featuredPost = allPosts.find((post) => post.data.featured) ?? allPosts[0];
-// One featured post plus a full three-column row of cards below it.
-const otherPosts = featuredPost ? allPosts.filter((post) => post.id !== featuredPost.id).slice(0, 3) : [];
-const posts = featuredPost ? [featuredPost, ...otherPosts] : allPosts.slice(0, 4);
-
-const homeSchema = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'IPTVnator',
-    url: 'https://4gray.github.io/iptvnator/',
-    description:
-      'A cross-platform IPTV player supporting M3U/M3U8 playlists, Xtream Codes API, and Stalker portals.',
-    inLanguage: 'en',
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: 'IPTVnator',
-    applicationCategory: 'MultimediaApplication',
-    operatingSystem: 'Windows, macOS, Linux, Web',
-    softwareVersion: release.version,
-    url: 'https://4gray.github.io/iptvnator/',
-    downloadUrl: 'https://github.com/4gray/iptvnator/releases/latest',
-    author: {
-      '@type': 'Person',
-      name: '4gray',
-      url: 'https://github.com/4gray',
-    },
-    sameAs: [
-      'https://github.com/4gray/iptvnator',
-      'https://t.me/iptvnator',
-      'https://ko-fi.com/4gray',
-    ],
-    description:
-      'Open-source IPTV player with M3U/M3U8, Xtream Codes API, and Stalker portal support.',
-  },
-];
+const downloads = await getTechHomeDownloads();
+const base = import.meta.env.BASE_URL;
+const icon = `${base}favicon-256x256.png`;
+const formatSize = (bytes: number) => `${Math.ceil(bytes / (1024 * 1024))} MB`;
+const windowsVersion = downloads.windows?.name.match(/tech-home-tv-(\d+\.\d+\.\d+)/i)?.[1];
+const androidVersion = downloads.android?.name.match(/TechHomeTV-(\d+\.\d+\.\d+)/i)?.[1];
+const canonical = new URL(base, Astro.site).toString();
 ---
 
-<BaseLayout
-  title="IPTVnator - Open Source IPTV Player"
-  description="A cross-platform IPTV player supporting M3U/M3U8 playlists, Xtream Codes API, and Stalker portals. Available as a desktop app and PWA."
-  keywords={['IPTV player', 'M3U', 'M3U8', 'Xtream Codes', 'Stalker portal', 'EPG', 'XMLTV', 'open-source']}
-  jsonLd={homeSchema}
->
-  <Hero release={release} stats={stats} />
-  <FeatureGrid />
-  <ScreenshotShowcase />
-  <DownloadCTA release={release} />
-  <SupportSection />
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#07120b" />
+    <meta name="description" content="نزّل Tech Home TV لويندوز وأندرويد. مشغل قوائم IPTV من مصادر المستخدم، مع دعم العربية والإنجليزية." />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href={icon} />
+    <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
+    <title>Tech Home TV | تنزيل التطبيق</title>
+    <style>
+      :root{color-scheme:dark;font-family:Arial,"Segoe UI",sans-serif;background:#07120b;color:#eff8f0}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#14532d 0,transparent 55%),#07120b;min-height:100vh}.wrap{max-width:960px;margin:auto;padding:32px 22px 48px}.top{display:flex;align-items:center;gap:14px;margin:0 0 56px}.top img{width:62px;height:62px;border-radius:16px}.brand{font-weight:800;font-size:21px;direction:ltr}.brand small{display:block;margin-top:5px;font-size:12px;color:#a7c7ac;font-weight:500}.hero{text-align:center;max-width:720px;margin:0 auto 35px}.hero h1{font-size:clamp(32px,6vw,54px);margin:0 0 14px}.hero p{color:#bfd3c2;line-height:1.9;margin:8px 0}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;margin-top:32px}.card{border:1px solid #285b38;background:#0d1c12;border-radius:18px;padding:25px;display:flex;flex-direction:column;min-height:245px}.card h2{margin:0 0 8px;font-size:23px}.card p{color:#b7c9ba;line-height:1.8;margin:8px 0}.version{font-size:13px;color:#95b99c;direction:ltr;text-align:right}.button{display:block;text-align:center;text-decoration:none;background:#20d455;color:#041108;font-weight:800;border-radius:11px;padding:14px;margin-top:auto}.button:hover{background:#54ec7d}.button.muted{background:#24432d;color:#e4f4e7}.contact{margin-top:32px;border-top:1px solid #25412d;padding-top:22px;text-align:center;color:#b7c9ba;line-height:2}.contact a{color:#6be98a;text-decoration:none}.en{direction:ltr;text-align:left;margin-top:36px;border-top:1px solid #25412d;padding-top:24px}.en p{color:#b7c9ba;line-height:1.8}.notice{font-size:13px;color:#829e87!important}footer{text-align:center;color:#718a75;font-size:12px;margin-top:32px}a:focus-visible{outline:3px solid white;outline-offset:3px}
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <header class="top">
+        <img src={icon} alt="شعار Tech Home TV" width="62" height="62" />
+        <div class="brand">Tech Home TV<small>مشغل الوسائط الخاص بك</small></div>
+      </header>
 
-  <!-- Recent Blog Posts -->
-  {
-    posts.length > 0 && (
-      <section class="py-24 sm:py-28">
-        <div class="mx-auto max-w-6xl px-6">
-          <div class="flex items-end justify-between">
-            <div>
-              <h2 class="font-display text-3xl font-bold tracking-tight text-surface-50 sm:text-4xl lg:text-5xl">
-                Latest updates
-              </h2>
-              <p class="mt-4 text-lg text-surface-400">
-                Release notes, tutorials, and project updates.
-              </p>
-            </div>
-            <a
-              href="/iptvnator/blog/"
-              class="hidden items-center gap-1.5 font-mono text-xs uppercase tracking-[0.1em] text-accent-500 transition-colors hover:text-accent-400 sm:inline-flex"
-            >
-              View all posts
-              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-          </div>
-
-          {/* Featured post */}
-          {featuredPost && (
-            <div class="mt-12">
-              <FeaturedBlogPost
-                title={featuredPost.data.title}
-                description={featuredPost.data.description}
-                pubDate={featuredPost.data.pubDate}
-                slug={featuredPost.id}
-                tags={featuredPost.data.tags}
-                heroImage={featuredPost.data.heroImage}
-              />
-            </div>
-          )}
-
-          {/* Other posts grid */}
-          {otherPosts.length > 0 && (
-            <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {otherPosts.map((post) => (
-                <BlogPostCard
-                  title={post.data.title}
-                  description={post.data.description}
-                  pubDate={post.data.pubDate}
-                  slug={post.id}
-                  tags={post.data.tags}
-                  heroImage={post.data.heroImage}
-                />
-              ))}
-            </div>
-          )}
-        </div>
+      <section class="hero" aria-labelledby="page-title">
+        <h1 id="page-title">مشاهدة أسهل، وتحكم بيدك</h1>
+        <p>حمّل Tech Home TV على ويندوز أو أندرويد. التطبيق مشغل وسائط فقط؛ أضف قوائمك ومصادرك الخاصة.</p>
       </section>
-    )
-  }
-</BaseLayout>
+
+      <section class="cards" aria-label="تنزيل التطبيق">
+        <article class="card">
+          <h2>نسخة Windows</h2>
+          <p>مثبّت لأجهزة Windows 10 وWindows 11 بنظام 64 بت.</p>
+          {downloads.windows && <p class="version">Version {windowsVersion} · {formatSize(downloads.windows.size)}</p>}
+          <a class:list={['button', !downloads.windows && 'muted']} href={downloads.windows?.url ?? downloads.releasesUrl}>
+            {downloads.windows ? 'تنزيل Windows x64' : 'عرض إصدارات Windows'}
+          </a>
+        </article>
+
+        <article class="card">
+          <h2>نسخة Android</h2>
+          <p>ملف APK للهواتف والأجهزة اللوحية وأجهزة Android TV وFire TV.</p>
+          {downloads.android && <p class="version">Version {androidVersion} · {formatSize(downloads.android.size)}</p>}
+          <a class:list={['button', !downloads.android && 'muted']} href={downloads.android?.url ?? downloads.releasesUrl}>
+            {downloads.android ? 'تنزيل Android APK' : 'عرض إصدارات Android'}
+          </a>
+        </article>
+      </section>
+
+      <section class="contact" aria-label="التواصل والدعم">
+        <div>للتواصل والدعم: <a href="tel:+9647744644492" dir="ltr">07744644492</a></div>
+        <div>الموقع: <a href="https://techhome.ct.ws" dir="ltr">techhome.ct.ws</a></div>
+        <p class="notice">لا يتضمن التطبيق قنوات أو اشتراكات. أضف مصادرك التي تملك حق استخدامها.</p>
+      </section>
+
+      <section class="en" lang="en" aria-label="English information">
+        <h2>Tech Home TV downloads</h2>
+        <p>Choose the Windows 64-bit installer or the Android APK above. Tech Home TV is a media player; it does not include channels or subscriptions.</p>
+        <p>Support: <a href="tel:+9647744644492" dir="ltr">07744644492</a> · <a href="https://techhome.ct.ws">techhome.ct.ws</a></p>
+      </section>
+
+      <footer>Tech Home TV is based on IPTVnator, an MIT-licensed open-source project. Source and release files are available on GitHub.</footer>
+    </main>
+  </body>
+</html>
+

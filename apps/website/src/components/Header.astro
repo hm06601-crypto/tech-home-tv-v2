@@ -1,11 +1,12 @@
 ---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const repo = 'https://github.com/hm06601-crypto/tech-home-tv-v2';
 const navLinks = [
-  { label: 'Features', href: '/iptvnator/features/' },
-  { label: 'Guides', href: '/iptvnator/guides/' },
-  { label: 'Compare', href: '/iptvnator/compare/' },
-  { label: 'Screenshots', href: '/iptvnator/#screenshots' },
-  { label: 'Download', href: '/iptvnator/download/' },
-  { label: 'Blog', href: '/iptvnator/blog/' },
+  { label: 'Features', href: `${base}/features/` },
+  { label: 'Guides', href: `${base}/guides/` },
+  { label: 'Compare', href: `${base}/compare/` },
+  { label: 'Download', href: `${base}/` },
+  { label: 'Blog', href: `${base}/blog/` },
 ];
 ---
 
@@ -17,14 +18,14 @@ const navLinks = [
 
   <nav class="relative mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
     <!-- Logo -->
-    <a href="/iptvnator/" class="flex items-center gap-3 group">
+    <a href={`${base}/`} class="flex items-center gap-3 group">
       <img
-        src="/iptvnator/favicon-256x256.png"
-        alt="IPTVnator logo"
-        class="h-7 w-7 transition-transform duration-300 group-hover:scale-110"
+        src={`${base}/favicon-256x256.png`}
+        alt="Tech Home TV logo"
+        class="h-10 w-10 transition-transform duration-300 group-hover:scale-110"
       />
       <span class="font-display text-xl font-semibold tracking-tight text-surface-50">
-        IPTVnator
+        Tech Home TV
       </span>
     </a>
 
@@ -46,7 +47,7 @@ const navLinks = [
     <!-- Right side actions -->
     <div class="hidden items-center gap-4 lg:flex">
       <a
-        href="https://github.com/4gray/iptvnator"
+        href={repo}
         target="_blank"
         rel="noopener noreferrer"
         class="text-surface-500 transition-colors hover:text-surface-200"
@@ -57,7 +58,7 @@ const navLinks = [
         </svg>
       </a>
       <a
-        href="https://github.com/4gray/iptvnator/releases/latest"
+        href={`${repo}/releases`}
         class="rounded-lg bg-accent-500 px-4 py-2 text-[13px] font-semibold text-surface-950 transition-colors duration-200 hover:bg-accent-400"
       >
         Download
@@ -100,7 +101,7 @@ const navLinks = [
       }
       <div class="flex items-center gap-3 pt-3">
         <a
-          href="https://github.com/4gray/iptvnator"
+          href={repo}
           target="_blank"
           rel="noopener noreferrer"
           class="flex items-center gap-2 rounded-lg px-3 py-2.5 text-[13px] font-medium text-surface-400 transition-colors hover:text-surface-200"
@@ -111,7 +112,7 @@ const navLinks = [
           GitHub
         </a>
         <a
-          href="https://github.com/4gray/iptvnator/releases/latest"
+          href={`${repo}/releases`}
           class="flex-1 rounded-lg bg-accent-500 px-3 py-2.5 text-center text-[13px] font-semibold text-surface-950 transition-colors hover:bg-accent-400"
         >
           Download
@@ -152,3 +153,4 @@ const navLinks = [
     lastScroll = scroll;
   });
 </script>
+

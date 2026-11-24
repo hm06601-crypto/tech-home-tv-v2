@@ -1,9 +1,8 @@
 /**
- * Canonical site location. The site is served from a GitHub Pages project
- * path, so every absolute URL has to carry the `/iptvnator` base.
+ * Canonical Tech Home TV site location on GitHub Pages.
  */
-export const SITE_ORIGIN = 'https://4gray.github.io';
-export const SITE_BASE = '/iptvnator';
+export const SITE_ORIGIN = 'https://hm06601-crypto.github.io';
+export const SITE_BASE = '/tech-home-tv-v2';
 
 /** Absolute URL for a site-relative path such as `/download/windows/`. */
 export function absoluteUrl(path: string): string {
@@ -14,3 +13,4 @@ export function absoluteUrl(path: string): string {
 export function siteHref(path: string): string {
   return `${SITE_BASE}${path}`;
 }
+

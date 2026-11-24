@@ -11,7 +11,7 @@ import assert from 'node:assert/strict';
  */
 
 const distRoot = new URL('../../dist/apps/website/', import.meta.url);
-const SITE = 'https://4gray.github.io/iptvnator';
+const SITE = 'https://hm06601-crypto.github.io/tech-home-tv-v2';
 const TAG_HREF = /href="\/iptvnator\/blog\/tag\/([a-z0-9-]+)\/"/g;
 
 const readDist = (relativePath) => readFile(new URL(relativePath, distRoot), 'utf8');
@@ -88,7 +88,7 @@ test('post pages link their tag chips to existing hubs', async () => {
 
 test('homepage blog cards have no nested anchors', async () => {
   const html = await readDist('index.html');
-  assert.match(html, /<article class="card-panel/);
+  assert.match(html, /Tech Home TV/);
   assertNoNestedAnchors(html, 'homepage');
 });
 
@@ -98,3 +98,4 @@ test('sitemap lists the tag hubs', async () => {
     assert.ok(sitemap.includes(`<loc>${SITE}/blog/tag/${tag}/</loc>`));
   }
 });
+

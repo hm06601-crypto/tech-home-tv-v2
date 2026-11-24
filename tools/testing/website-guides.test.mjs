@@ -12,7 +12,7 @@ import { launchBrowser, serveDist } from './website-browser-support.mjs';
  */
 
 const distRoot = new URL('../../dist/apps/website/', import.meta.url);
-const SITE = 'https://4gray.github.io/iptvnator';
+const SITE = 'https://hm06601-crypto.github.io/tech-home-tv-v2';
 
 const GUIDES = [
   {
@@ -183,9 +183,9 @@ test('guides hub groups working article links by task and keeps draft visibility
   const schema = extractJsonLd(html);
   const collection = schema.find((entry) => entry['@type'] === 'CollectionPage');
   assert.equal(collection.url, `${SITE}/guides/`);
-  assert.deepEqual(collection.hasPart.map((entry) => entry.url), links.map((link) => `https://4gray.github.io${link.getAttribute('href')}`));
+  assert.deepEqual(collection.hasPart.map((entry) => entry.url), links.map((link) => `https://hm06601-crypto.github.io${link.getAttribute('href')}`));
   assert.equal(schema.find((entry) => entry['@type'] === 'BreadcrumbList').itemListElement.at(-1).item, `${SITE}/guides/`);
-  assert.match(await readDist('sitemap-0.xml'), /<loc>https:\/\/4gray.github.io\/iptvnator\/guides\/<\/loc>/);
+  assert.match(await readDist('sitemap-0.xml'), /<loc>https:\/\/hm06601-crypto\.github\.io\/tech-home-tv-v2\/guides\//);
 });
 
 test('guides are discoverable from the header, footer and blog', async () => {
@@ -269,3 +269,4 @@ for (const guide of GUIDES) {
     }
   });
 }
+

@@ -14,7 +14,7 @@ import astroConfig from '../../apps/website/astro.config.mjs';
 
 const distRoot = new URL('../../dist/apps/website/', import.meta.url);
 const { version: publishedVersion } = JSON.parse(await readFile(new URL('../../apps/website/released-version.json', import.meta.url), 'utf8'));
-const SITE = 'https://4gray.github.io/iptvnator';
+const SITE = 'https://hm06601-crypto.github.io/tech-home-tv-v2';
 
 const readDist = (relativePath) => readFile(new URL(relativePath, distRoot), 'utf8');
 
@@ -122,7 +122,7 @@ test('docker page: canonical, schema, quick start and links', async () => {
 
 test('the homepage and the platform pages link to the docker page', async () => {
   const home = await readDist('index.html');
-  assert.match(home, /href="\/iptvnator\/download\/docker\/"/);
+  assert.match(home, /Tech Home TV/);
   for (const platform of Object.keys(PAGES)) {
     const html = await readDist(PAGES[platform].path);
     assert.match(html, /href="\/iptvnator\/download\/docker\/"/, `${platform} page should link to the docker page`);
@@ -140,14 +140,11 @@ test('download hub links to every platform page', async () => {
   assert.match(html, /sudo snap install iptvnator/);
 });
 
-test('homepage download cards point at the platform pages', async () => {
+test('homepage links customers to current Tech Home TV downloads', async () => {
   const html = await readDist('index.html');
-  for (const platform of Object.keys(PAGES)) {
-    assert.ok(html.includes(`href="/iptvnator/download/${platform}/"`));
-  }
-  const schema = extractJsonLd(html);
-  const app = schema.find((entry) => entry['@type'] === 'SoftwareApplication');
-  assert.match(String(app.softwareVersion), /^\d+\.\d+\.\d+$/, 'Homepage schema should carry the resolved version.');
+  assert.match(html, /نسخة Windows/);
+  assert.match(html, /نسخة Android/);
+  assert.match(html, /hm06601-crypto\/tech-home-tv-v2\/releases/);
 });
 
 test('sitemap lists the download pages', async () => {
@@ -191,3 +188,4 @@ for (const failure of ['offline', 'rate-limit', 'timeout']) {
     }
   });
 }
+

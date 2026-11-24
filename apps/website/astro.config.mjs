@@ -13,8 +13,8 @@ const { version } = JSON.parse(
 // @astrojs/tailwind integration only supports Astro <= 5.
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://4gray.github.io',
-  base: '/iptvnator',
+  site: 'https://hm06601-crypto.github.io',
+  base: '/tech-home-tv-v2',
   outDir: '../../dist/apps/website',
   integrations: [sitemap(), mdx()],
   vite: {
@@ -23,3 +23,4 @@ export default defineConfig({
     },
   },
 });
+

@@ -1,14 +1,14 @@
 {
-  "name": "IPTVnator",
-  "short_name": "IPTVnator",
+  "name": "Tech Home TV",
+  "short_name": "Tech Home TV",
   "icons": [
     {
-      "src": "/iptvnator/android-chrome-192x192.png",
+      "src": "/tech-home-tv-v2/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/iptvnator/android-chrome-512x512.png",
+      "src": "/tech-home-tv-v2/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
@@ -16,3 +16,4 @@
   "theme_color": "#0a0a08",
   "background_color": "#0a0a08"
 }
+

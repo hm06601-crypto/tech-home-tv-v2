@@ -9,7 +9,7 @@ import assert from 'node:assert/strict';
  */
 
 const distRoot = new URL('../../dist/apps/website/', import.meta.url);
-const SITE = 'https://4gray.github.io/iptvnator';
+const SITE = 'https://hm06601-crypto.github.io/tech-home-tv-v2';
 const FEATURES = ['m3u-player', 'xtream-codes-player', 'stalker-portal-player', 'epg', 'remote-control'];
 
 const readDist = (relativePath) => readFile(new URL(relativePath, distRoot), 'utf8');
@@ -53,12 +53,11 @@ test('features hub links to every feature page and the download hub', async () =
   assert.match(html, /href="\/iptvnator\/download\/"/);
 });
 
-test('homepage feature cards and the header link into the feature pages', async () => {
+test('homepage is the Tech Home TV download landing page', async () => {
   const html = await readDist('index.html');
-  assert.match(html, /href="\/iptvnator\/features\/"/);
-  for (const slug of ['m3u-player', 'xtream-codes-player', 'epg', 'stalker-portal-player', 'remote-control']) {
-    assert.ok(html.includes(`href="/iptvnator/features/${slug}/"`));
-  }
+  assert.match(html, /Tech Home TV/);
+  assert.match(html, /hm06601-crypto\/tech-home-tv-v2\/releases/);
+  assert.doesNotMatch(html, /href="https:\/\/github\.com\/4gray\/iptvnator/);
 });
 
 test('sitemap lists the feature pages', async () => {
@@ -67,3 +66,4 @@ test('sitemap lists the feature pages', async () => {
     assert.ok(sitemap.includes(`<loc>${SITE}/${path}</loc>`));
   }
 });
+
