@@ -23,11 +23,11 @@ const check = (c, m) => { if (!c) failures++; console.log((c ? '  ✓ ' : '  ✗
 
 await page.goto('http://127.0.0.1:43330/workspace/sources', { waitUntil: 'networkidle' });
 await page.waitForTimeout(800);
-await page.getByRole('button', { name: /Add M3U/i }).click();
+await page.getByRole('button', { name: /(?:Add M3U|إضافة M3U)/i }).click();
 await page.waitForTimeout(600);
 const dialog = page.locator('mat-dialog-container');
 await dialog.locator('input').nth(0).fill('http://127.0.0.1:43331/sample.m3u');
-await dialog.getByRole('button', { name: /Add playlist/i }).click();
+await dialog.getByRole('button', { name: /(?:Add playlist|إضافة قائمة تشغيل|إضافة القائمة)/i }).click();
 await page.waitForTimeout(2500);
 
 const focused = () => page.evaluate(() => window.__tvShell.state().active);
