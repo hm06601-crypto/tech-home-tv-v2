@@ -26,20 +26,24 @@ export function toDocumentLanguage(appLanguage?: string | null): string {
     return DOCUMENT_LANGUAGE_OVERRIDES[code.toLowerCase()] ?? code;
 }
 
+/** Arabic UI languages render right-to-left; all other supported locales use LTR. */
+export function toDocumentDirection(appLanguage?: string | null): 'rtl' | 'ltr' {
+    const code = appLanguage?.trim().replace(/_/g, '-').toLowerCase();
+    return code === 'ar' || code === 'ary' ? 'rtl' : 'ltr';
+}
+
 /**
- * Keeps `<html lang>` in step with the language the UI renders, whichever
- * code path switches it (startup, settings). With no active language the UI
- * renders the fallback: startup seeds it from the stored hint and then resets
- * it to English when no settings exist, without an active-language change.
+ * Keeps `<html lang>` and `<html dir>` in step with the language the UI
+ * renders, whichever code path switches it (startup, settings).
  * Must run in an injection context.
  */
 export function syncDocumentLanguage(): void {
     const document = inject(DOCUMENT);
     const translate = inject(TranslateService);
     const apply = (): void => {
-        document.documentElement.lang = toDocumentLanguage(
-            translate.currentLang || translate.getDefaultLang()
-        );
+        const language = translate.currentLang || translate.getDefaultLang();
+        document.documentElement.lang = toDocumentLanguage(language);
+        document.documentElement.dir = toDocumentDirection(language);
     };
 
     apply();

@@ -1,7 +1,7 @@
 @use '../../../../../../../ui/styles/app-controls' as controls;
 
-// The first-run welcome (UI-70) on the shared state view: the IPTVnator
-// glyph, one accent action ("Add source"), the source types as secondary
+// The first-run welcome (UI-70) on the shared state view: the Tech Home TV
+// logo, one accent action ("Add source"), the source types as secondary
 // actions and, on the dashboard, what the app does. Flat token surfaces in
 // every theme; no gradient text, tilt, stripe grid, glow or text shadow,
 // and no motion beyond the state view's fade (off under reduced motion).
@@ -32,18 +32,8 @@
     display: block;
     width: 64px;
     height: 64px;
-}
-
-.welcome__glyph-tile {
-    fill: var(--app-list-selected-bg);
-}
-
-.welcome__glyph-ink {
-    fill: var(--app-list-selected-fg);
-}
-
-.welcome__glyph-line {
-    stroke: var(--app-list-selected-fg);
+    object-fit: contain;
+    border-radius: 12px;
 }
 
 ul {
