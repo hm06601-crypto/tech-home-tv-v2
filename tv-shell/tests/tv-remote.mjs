@@ -82,7 +82,7 @@ console.log('  focused:', await focused());
 
 console.log('1b. real Material checkbox remains reachable and visibly focused');
 await page.goto(URL_ + '/workspace/sources', { waitUntil: 'networkidle' });
-await page.getByRole('button', { name: /Add Stalker/i }).click();
+await page.getByRole('button', { name: /(?:Add Stalker|إضافة Stalker)/i }).click();
 const materialDialog = page.locator('mat-dialog-container');
 const materialCheckbox = materialDialog.locator('mat-checkbox input[type="checkbox"]').first();
 await materialCheckbox.waitFor({ state: 'attached' });
@@ -114,7 +114,7 @@ await key('ArrowDown');
 await expect(page.getByRole('link', { name: 'Sources', exact: true })).toBeFocused();
 await key('Enter');
 await page.waitForURL('**/workspace/sources');
-const addM3u = page.getByRole('button', { name: 'Add M3U', exact: true });
+const addM3u = page.getByRole('button', { name: /^(?:Add M3U|إضافة M3U)$/i });
 await expect(addM3u).toBeVisible();
 // Past the last rail link, Down enters the welcome: its "Add source" action,
 // then the source types, one per row.
